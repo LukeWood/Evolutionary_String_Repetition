@@ -53,7 +53,7 @@ while not machineguess == target:
 	if(sleep):
 		time.sleep(1)
 	generation+=1
-	generationlength = generation * 100
+	generationlength = int(float(generationlength) * 1.5)
 	for i in range(0, generationlength):
 		tempguess = list(machineguess)
 		for z in range(0,mutationrate): 
