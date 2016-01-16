@@ -1,6 +1,7 @@
 import random
 import string
-
+import time
+import sys
 def hamming_distance(a,b):
 	if(len(a)!=len(b)):
 		return None
@@ -26,6 +27,9 @@ print("This AI program will learn how to print the string you input")
 print("Please enter your string:")
 entered = raw_input()
 if checkstring(entered):
-	print("Thank you")
+	print("Valid string entered, the program will now begin working.")
+	time.sleep(3)
 else:
-	print("You suck")
+	print("please enter a valid string")
+	sys.exit()
+
