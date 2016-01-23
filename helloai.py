@@ -71,7 +71,7 @@ while not machineguess == target:
 print("Generation {gen}: ".format(gen=generation)+machineguess)
 print("The program has successfully written back your string.")
 with open("matlabvisualization.m","w+") as f:
-	f.write("x = [");
+	f.write("y = [");
 	for i in fullList:
 		f.write("{fitness};".format(fitness=i[1]));
-	f.write("];\nplot(x)\nxlabel('Generations');\nylabel('Accuracy');\ntitle('Evolutionary String Repetition');");
+	f.write("];ymax=max(y);\ny=ymax-y;\ny=y/ymax;\ny = y*100;plot(y,'b-o');\nxlabel('Generations');\nylabel('Accuracy (%)');\ntitle('Evolutionary String Repetition');");
