@@ -27,16 +27,18 @@ print("\nWelcome to helloai")
 print("This AI program will learn how to print the string you input")
 print("Please enter your string:")
 random.seed(datetime.now())
-target = raw_input()
+target = input()
 if not checkstring(target):
 	print("please enter a valid string")
 	sys.exit()
 
+fullList =list();
+
 print("Would you like to pause after each generation to see the program work over time?(Y/N)")
-sleep = raw_input()
+sleep = input()
 while sleep not in ("Y","N","n","y"):
 	print("please enter a valid value")
-	sleep = raw_input()
+	sleep = input()
 if sleep in ("Y","y"):
 	sleep = True
 else:
@@ -50,10 +52,11 @@ currentfit = hamming_distance(machineguess,target)
 
 while not machineguess == target:
 	print("Generation {gen}: ".format(gen=generation)+machineguess)
+	fullList.append([generation,currentfit]);
 	if(sleep):
 		time.sleep(1)
 	generation+=1
-	generationlength = int(float(generationlength) * 1.5)
+	generationlength = int(float(generationlength) * 1.2)
 	for i in range(0, generationlength):
 		tempguess = list(machineguess)
 		for z in range(0,mutationrate): 
@@ -67,3 +70,8 @@ while not machineguess == target:
 			currentfit = tempfit
 print("Generation {gen}: ".format(gen=generation)+machineguess)
 print("The program has successfully written back your string.")
+with open("matlabvisualization.m","w+") as f:
+	f.write("x = [];\n");
+	for i in fullList:
+		f.write("x=[x;[{fitness}]];\n".format(fitness=i[1]));
+	f.write("plot(x)\nxlabel('Generations');\nylabel('Accuracy');\ntitle('Evolutionary String Repetition');");
